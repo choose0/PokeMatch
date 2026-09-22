@@ -1,0 +1,2039 @@
+{
+  "model": "Xenova/clip-vit-base-patch32",
+  "labels": {
+    "subject": [],
+    "vibe": []
+  },
+  "pokemon": [
+    {
+      "id": 1,
+      "nameEn": "bulbasaur",
+      "nameKo": "이상해씨",
+      "types": [
+        "grass",
+        "poison"
+      ],
+      "color": "green",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 2,
+      "nameEn": "ivysaur",
+      "nameKo": "이상해풀",
+      "types": [
+        "grass",
+        "poison"
+      ],
+      "color": "green",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/2.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 3,
+      "nameEn": "venusaur",
+      "nameKo": "이상해꽃",
+      "types": [
+        "grass",
+        "poison"
+      ],
+      "color": "green",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/3.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 4,
+      "nameEn": "charmander",
+      "nameKo": "파이리",
+      "types": [
+        "fire"
+      ],
+      "color": "red",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 5,
+      "nameEn": "charmeleon",
+      "nameKo": "리자드",
+      "types": [
+        "fire"
+      ],
+      "color": "red",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/5.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 6,
+      "nameEn": "charizard",
+      "nameKo": "리자몽",
+      "types": [
+        "fire",
+        "flying"
+      ],
+      "color": "red",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 7,
+      "nameEn": "squirtle",
+      "nameKo": "꼬부기",
+      "types": [
+        "water"
+      ],
+      "color": "blue",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 8,
+      "nameEn": "wartortle",
+      "nameKo": "어니부기",
+      "types": [
+        "water"
+      ],
+      "color": "blue",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/8.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 9,
+      "nameEn": "blastoise",
+      "nameKo": "거북왕",
+      "types": [
+        "water"
+      ],
+      "color": "blue",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/9.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 10,
+      "nameEn": "caterpie",
+      "nameKo": "캐터피",
+      "types": [
+        "bug"
+      ],
+      "color": "green",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/10.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 11,
+      "nameEn": "metapod",
+      "nameKo": "단데기",
+      "types": [
+        "bug"
+      ],
+      "color": "green",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/11.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 12,
+      "nameEn": "butterfree",
+      "nameKo": "버터플",
+      "types": [
+        "bug",
+        "flying"
+      ],
+      "color": "white",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/12.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 13,
+      "nameEn": "weedle",
+      "nameKo": "뿔충이",
+      "types": [
+        "bug",
+        "poison"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/13.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 14,
+      "nameEn": "kakuna",
+      "nameKo": "딱충이",
+      "types": [
+        "bug",
+        "poison"
+      ],
+      "color": "yellow",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/14.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 15,
+      "nameEn": "beedrill",
+      "nameKo": "독침붕",
+      "types": [
+        "bug",
+        "poison"
+      ],
+      "color": "yellow",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/15.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 16,
+      "nameEn": "pidgey",
+      "nameKo": "구구",
+      "types": [
+        "normal",
+        "flying"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/16.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 17,
+      "nameEn": "pidgeotto",
+      "nameKo": "피죤",
+      "types": [
+        "normal",
+        "flying"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/17.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 18,
+      "nameEn": "pidgeot",
+      "nameKo": "피죤투",
+      "types": [
+        "normal",
+        "flying"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/18.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 19,
+      "nameEn": "rattata",
+      "nameKo": "꼬렛",
+      "types": [
+        "normal"
+      ],
+      "color": "purple",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/19.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 20,
+      "nameEn": "raticate",
+      "nameKo": "레트라",
+      "types": [
+        "normal"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/20.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 21,
+      "nameEn": "spearow",
+      "nameKo": "깨비참",
+      "types": [
+        "normal",
+        "flying"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/21.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 22,
+      "nameEn": "fearow",
+      "nameKo": "깨비드릴조",
+      "types": [
+        "normal",
+        "flying"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/22.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 23,
+      "nameEn": "ekans",
+      "nameKo": "아보",
+      "types": [
+        "poison"
+      ],
+      "color": "purple",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/23.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 24,
+      "nameEn": "arbok",
+      "nameKo": "아보크",
+      "types": [
+        "poison"
+      ],
+      "color": "purple",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/24.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 25,
+      "nameEn": "pikachu",
+      "nameKo": "피카츄",
+      "types": [
+        "electric"
+      ],
+      "color": "yellow",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 26,
+      "nameEn": "raichu",
+      "nameKo": "라이츄",
+      "types": [
+        "electric"
+      ],
+      "color": "yellow",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/26.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 27,
+      "nameEn": "sandshrew",
+      "nameKo": "모래두지",
+      "types": [
+        "ground"
+      ],
+      "color": "yellow",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/27.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 28,
+      "nameEn": "sandslash",
+      "nameKo": "고지",
+      "types": [
+        "ground"
+      ],
+      "color": "yellow",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/28.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 29,
+      "nameEn": "nidoran-f",
+      "nameKo": "니드런♀",
+      "types": [
+        "poison"
+      ],
+      "color": "blue",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/29.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 30,
+      "nameEn": "nidorina",
+      "nameKo": "니드리나",
+      "types": [
+        "poison"
+      ],
+      "color": "blue",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/30.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 31,
+      "nameEn": "nidoqueen",
+      "nameKo": "니드퀸",
+      "types": [
+        "poison",
+        "ground"
+      ],
+      "color": "blue",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/31.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 32,
+      "nameEn": "nidoran-m",
+      "nameKo": "니드런♂",
+      "types": [
+        "poison"
+      ],
+      "color": "purple",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/32.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 33,
+      "nameEn": "nidorino",
+      "nameKo": "니드리노",
+      "types": [
+        "poison"
+      ],
+      "color": "purple",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/33.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 34,
+      "nameEn": "nidoking",
+      "nameKo": "니드킹",
+      "types": [
+        "poison",
+        "ground"
+      ],
+      "color": "purple",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/34.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 35,
+      "nameEn": "clefairy",
+      "nameKo": "삐삐",
+      "types": [
+        "fairy"
+      ],
+      "color": "pink",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/35.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 36,
+      "nameEn": "clefable",
+      "nameKo": "픽시",
+      "types": [
+        "fairy"
+      ],
+      "color": "pink",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/36.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 37,
+      "nameEn": "vulpix",
+      "nameKo": "식스테일",
+      "types": [
+        "fire"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/37.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 38,
+      "nameEn": "ninetales",
+      "nameKo": "나인테일",
+      "types": [
+        "fire"
+      ],
+      "color": "yellow",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/38.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 39,
+      "nameEn": "jigglypuff",
+      "nameKo": "푸린",
+      "types": [
+        "normal",
+        "fairy"
+      ],
+      "color": "pink",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/39.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 40,
+      "nameEn": "wigglytuff",
+      "nameKo": "푸크린",
+      "types": [
+        "normal",
+        "fairy"
+      ],
+      "color": "pink",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/40.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 41,
+      "nameEn": "zubat",
+      "nameKo": "주뱃",
+      "types": [
+        "poison",
+        "flying"
+      ],
+      "color": "purple",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/41.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 42,
+      "nameEn": "golbat",
+      "nameKo": "골뱃",
+      "types": [
+        "poison",
+        "flying"
+      ],
+      "color": "purple",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/42.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 43,
+      "nameEn": "oddish",
+      "nameKo": "뚜벅쵸",
+      "types": [
+        "grass",
+        "poison"
+      ],
+      "color": "blue",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/43.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 44,
+      "nameEn": "gloom",
+      "nameKo": "냄새꼬",
+      "types": [
+        "grass",
+        "poison"
+      ],
+      "color": "blue",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/44.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 45,
+      "nameEn": "vileplume",
+      "nameKo": "라플레시아",
+      "types": [
+        "grass",
+        "poison"
+      ],
+      "color": "red",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/45.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 46,
+      "nameEn": "paras",
+      "nameKo": "파라스",
+      "types": [
+        "bug",
+        "grass"
+      ],
+      "color": "red",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/46.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 47,
+      "nameEn": "parasect",
+      "nameKo": "파라섹트",
+      "types": [
+        "bug",
+        "grass"
+      ],
+      "color": "red",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/47.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 48,
+      "nameEn": "venonat",
+      "nameKo": "콘팡",
+      "types": [
+        "bug",
+        "poison"
+      ],
+      "color": "purple",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/48.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 49,
+      "nameEn": "venomoth",
+      "nameKo": "도나리",
+      "types": [
+        "bug",
+        "poison"
+      ],
+      "color": "purple",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/49.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 50,
+      "nameEn": "diglett",
+      "nameKo": "디그다",
+      "types": [
+        "ground"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/50.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 51,
+      "nameEn": "dugtrio",
+      "nameKo": "닥트리오",
+      "types": [
+        "ground"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/51.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 52,
+      "nameEn": "meowth",
+      "nameKo": "나옹",
+      "types": [
+        "normal"
+      ],
+      "color": "yellow",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/52.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 53,
+      "nameEn": "persian",
+      "nameKo": "페르시온",
+      "types": [
+        "normal"
+      ],
+      "color": "yellow",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/53.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 54,
+      "nameEn": "psyduck",
+      "nameKo": "고라파덕",
+      "types": [
+        "water"
+      ],
+      "color": "yellow",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/54.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 55,
+      "nameEn": "golduck",
+      "nameKo": "골덕",
+      "types": [
+        "water"
+      ],
+      "color": "blue",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/55.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 56,
+      "nameEn": "mankey",
+      "nameKo": "망키",
+      "types": [
+        "fighting"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/56.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 57,
+      "nameEn": "primeape",
+      "nameKo": "성원숭",
+      "types": [
+        "fighting"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/57.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 58,
+      "nameEn": "growlithe",
+      "nameKo": "가디",
+      "types": [
+        "fire"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/58.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 59,
+      "nameEn": "arcanine",
+      "nameKo": "윈디",
+      "types": [
+        "fire"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/59.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 60,
+      "nameEn": "poliwag",
+      "nameKo": "발챙이",
+      "types": [
+        "water"
+      ],
+      "color": "blue",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/60.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 61,
+      "nameEn": "poliwhirl",
+      "nameKo": "슈륙챙이",
+      "types": [
+        "water"
+      ],
+      "color": "blue",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/61.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 62,
+      "nameEn": "poliwrath",
+      "nameKo": "강챙이",
+      "types": [
+        "water",
+        "fighting"
+      ],
+      "color": "blue",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/62.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 63,
+      "nameEn": "abra",
+      "nameKo": "캐이시",
+      "types": [
+        "psychic"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/63.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 64,
+      "nameEn": "kadabra",
+      "nameKo": "윤겔라",
+      "types": [
+        "psychic"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/64.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 65,
+      "nameEn": "alakazam",
+      "nameKo": "후딘",
+      "types": [
+        "psychic"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/65.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 66,
+      "nameEn": "machop",
+      "nameKo": "알통몬",
+      "types": [
+        "fighting"
+      ],
+      "color": "gray",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/66.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 67,
+      "nameEn": "machoke",
+      "nameKo": "근육몬",
+      "types": [
+        "fighting"
+      ],
+      "color": "gray",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/67.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 68,
+      "nameEn": "machamp",
+      "nameKo": "괴력몬",
+      "types": [
+        "fighting"
+      ],
+      "color": "gray",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/68.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 69,
+      "nameEn": "bellsprout",
+      "nameKo": "모다피",
+      "types": [
+        "grass",
+        "poison"
+      ],
+      "color": "green",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/69.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 70,
+      "nameEn": "weepinbell",
+      "nameKo": "우츠동",
+      "types": [
+        "grass",
+        "poison"
+      ],
+      "color": "green",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/70.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 71,
+      "nameEn": "victreebel",
+      "nameKo": "우츠보트",
+      "types": [
+        "grass",
+        "poison"
+      ],
+      "color": "green",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/71.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 72,
+      "nameEn": "tentacool",
+      "nameKo": "왕눈해",
+      "types": [
+        "water",
+        "poison"
+      ],
+      "color": "blue",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/72.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 73,
+      "nameEn": "tentacruel",
+      "nameKo": "독파리",
+      "types": [
+        "water",
+        "poison"
+      ],
+      "color": "blue",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/73.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 74,
+      "nameEn": "geodude",
+      "nameKo": "꼬마돌",
+      "types": [
+        "rock",
+        "ground"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/74.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 75,
+      "nameEn": "graveler",
+      "nameKo": "데구리",
+      "types": [
+        "rock",
+        "ground"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/75.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 76,
+      "nameEn": "golem",
+      "nameKo": "딱구리",
+      "types": [
+        "rock",
+        "ground"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/76.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 77,
+      "nameEn": "ponyta",
+      "nameKo": "포니타",
+      "types": [
+        "fire"
+      ],
+      "color": "yellow",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/77.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 78,
+      "nameEn": "rapidash",
+      "nameKo": "날쌩마",
+      "types": [
+        "fire"
+      ],
+      "color": "yellow",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/78.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 79,
+      "nameEn": "slowpoke",
+      "nameKo": "야돈",
+      "types": [
+        "water",
+        "psychic"
+      ],
+      "color": "pink",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/79.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 80,
+      "nameEn": "slowbro",
+      "nameKo": "야도란",
+      "types": [
+        "water",
+        "psychic"
+      ],
+      "color": "pink",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/80.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 81,
+      "nameEn": "magnemite",
+      "nameKo": "코일",
+      "types": [
+        "electric",
+        "steel"
+      ],
+      "color": "gray",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/81.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 82,
+      "nameEn": "magneton",
+      "nameKo": "레어코일",
+      "types": [
+        "electric",
+        "steel"
+      ],
+      "color": "gray",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/82.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 83,
+      "nameEn": "farfetchd",
+      "nameKo": "파오리",
+      "types": [
+        "normal",
+        "flying"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/83.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 84,
+      "nameEn": "doduo",
+      "nameKo": "두두",
+      "types": [
+        "normal",
+        "flying"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/84.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 85,
+      "nameEn": "dodrio",
+      "nameKo": "두트리오",
+      "types": [
+        "normal",
+        "flying"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/85.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 86,
+      "nameEn": "seel",
+      "nameKo": "쥬쥬",
+      "types": [
+        "water"
+      ],
+      "color": "white",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/86.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 87,
+      "nameEn": "dewgong",
+      "nameKo": "쥬레곤",
+      "types": [
+        "water",
+        "ice"
+      ],
+      "color": "white",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/87.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 88,
+      "nameEn": "grimer",
+      "nameKo": "질퍽이",
+      "types": [
+        "poison"
+      ],
+      "color": "purple",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/88.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 89,
+      "nameEn": "muk",
+      "nameKo": "질뻐기",
+      "types": [
+        "poison"
+      ],
+      "color": "purple",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/89.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 90,
+      "nameEn": "shellder",
+      "nameKo": "셀러",
+      "types": [
+        "water"
+      ],
+      "color": "purple",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/90.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 91,
+      "nameEn": "cloyster",
+      "nameKo": "파르셀",
+      "types": [
+        "water",
+        "ice"
+      ],
+      "color": "purple",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/91.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 92,
+      "nameEn": "gastly",
+      "nameKo": "고오스",
+      "types": [
+        "ghost",
+        "poison"
+      ],
+      "color": "purple",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/92.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 93,
+      "nameEn": "haunter",
+      "nameKo": "고우스트",
+      "types": [
+        "ghost",
+        "poison"
+      ],
+      "color": "purple",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/93.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 94,
+      "nameEn": "gengar",
+      "nameKo": "팬텀",
+      "types": [
+        "ghost",
+        "poison"
+      ],
+      "color": "purple",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/94.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 95,
+      "nameEn": "onix",
+      "nameKo": "롱스톤",
+      "types": [
+        "rock",
+        "ground"
+      ],
+      "color": "gray",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/95.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 96,
+      "nameEn": "drowzee",
+      "nameKo": "슬리프",
+      "types": [
+        "psychic"
+      ],
+      "color": "yellow",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/96.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 97,
+      "nameEn": "hypno",
+      "nameKo": "슬리퍼",
+      "types": [
+        "psychic"
+      ],
+      "color": "yellow",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/97.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 98,
+      "nameEn": "krabby",
+      "nameKo": "크랩",
+      "types": [
+        "water"
+      ],
+      "color": "red",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/98.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 99,
+      "nameEn": "kingler",
+      "nameKo": "킹크랩",
+      "types": [
+        "water"
+      ],
+      "color": "red",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/99.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 100,
+      "nameEn": "voltorb",
+      "nameKo": "찌리리공",
+      "types": [
+        "electric"
+      ],
+      "color": "red",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/100.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 101,
+      "nameEn": "electrode",
+      "nameKo": "붐볼",
+      "types": [
+        "electric"
+      ],
+      "color": "red",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/101.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 102,
+      "nameEn": "exeggcute",
+      "nameKo": "아라리",
+      "types": [
+        "grass",
+        "psychic"
+      ],
+      "color": "pink",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/102.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 103,
+      "nameEn": "exeggutor",
+      "nameKo": "나시",
+      "types": [
+        "grass",
+        "psychic"
+      ],
+      "color": "yellow",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/103.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 104,
+      "nameEn": "cubone",
+      "nameKo": "탕구리",
+      "types": [
+        "ground"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/104.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 105,
+      "nameEn": "marowak",
+      "nameKo": "텅구리",
+      "types": [
+        "ground"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/105.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 106,
+      "nameEn": "hitmonlee",
+      "nameKo": "시라소몬",
+      "types": [
+        "fighting"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/106.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 107,
+      "nameEn": "hitmonchan",
+      "nameKo": "홍수몬",
+      "types": [
+        "fighting"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/107.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 108,
+      "nameEn": "lickitung",
+      "nameKo": "내루미",
+      "types": [
+        "normal"
+      ],
+      "color": "pink",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/108.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 109,
+      "nameEn": "koffing",
+      "nameKo": "또가스",
+      "types": [
+        "poison"
+      ],
+      "color": "purple",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/109.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 110,
+      "nameEn": "weezing",
+      "nameKo": "또도가스",
+      "types": [
+        "poison"
+      ],
+      "color": "purple",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/110.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 111,
+      "nameEn": "rhyhorn",
+      "nameKo": "뿔카노",
+      "types": [
+        "ground",
+        "rock"
+      ],
+      "color": "gray",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/111.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 112,
+      "nameEn": "rhydon",
+      "nameKo": "코뿌리",
+      "types": [
+        "ground",
+        "rock"
+      ],
+      "color": "gray",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/112.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 113,
+      "nameEn": "chansey",
+      "nameKo": "럭키",
+      "types": [
+        "normal"
+      ],
+      "color": "pink",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/113.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 114,
+      "nameEn": "tangela",
+      "nameKo": "덩쿠리",
+      "types": [
+        "grass"
+      ],
+      "color": "blue",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/114.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 115,
+      "nameEn": "kangaskhan",
+      "nameKo": "캥카",
+      "types": [
+        "normal"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/115.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 116,
+      "nameEn": "horsea",
+      "nameKo": "쏘드라",
+      "types": [
+        "water"
+      ],
+      "color": "blue",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/116.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 117,
+      "nameEn": "seadra",
+      "nameKo": "시드라",
+      "types": [
+        "water"
+      ],
+      "color": "blue",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/117.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 118,
+      "nameEn": "goldeen",
+      "nameKo": "콘치",
+      "types": [
+        "water"
+      ],
+      "color": "red",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/118.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 119,
+      "nameEn": "seaking",
+      "nameKo": "왕콘치",
+      "types": [
+        "water"
+      ],
+      "color": "red",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/119.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 120,
+      "nameEn": "staryu",
+      "nameKo": "별가사리",
+      "types": [
+        "water"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/120.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 121,
+      "nameEn": "starmie",
+      "nameKo": "아쿠스타",
+      "types": [
+        "water",
+        "psychic"
+      ],
+      "color": "purple",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/121.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 122,
+      "nameEn": "mr-mime",
+      "nameKo": "마임맨",
+      "types": [
+        "psychic",
+        "fairy"
+      ],
+      "color": "pink",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/122.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 123,
+      "nameEn": "scyther",
+      "nameKo": "스라크",
+      "types": [
+        "bug",
+        "flying"
+      ],
+      "color": "green",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/123.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 124,
+      "nameEn": "jynx",
+      "nameKo": "루주라",
+      "types": [
+        "ice",
+        "psychic"
+      ],
+      "color": "red",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/124.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 125,
+      "nameEn": "electabuzz",
+      "nameKo": "에레브",
+      "types": [
+        "electric"
+      ],
+      "color": "yellow",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/125.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 126,
+      "nameEn": "magmar",
+      "nameKo": "마그마",
+      "types": [
+        "fire"
+      ],
+      "color": "red",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/126.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 127,
+      "nameEn": "pinsir",
+      "nameKo": "쁘사이저",
+      "types": [
+        "bug"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/127.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 128,
+      "nameEn": "tauros",
+      "nameKo": "켄타로스",
+      "types": [
+        "normal"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/128.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 129,
+      "nameEn": "magikarp",
+      "nameKo": "잉어킹",
+      "types": [
+        "water"
+      ],
+      "color": "red",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/129.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 130,
+      "nameEn": "gyarados",
+      "nameKo": "갸라도스",
+      "types": [
+        "water",
+        "flying"
+      ],
+      "color": "blue",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/130.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 131,
+      "nameEn": "lapras",
+      "nameKo": "라프라스",
+      "types": [
+        "water",
+        "ice"
+      ],
+      "color": "blue",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/131.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 132,
+      "nameEn": "ditto",
+      "nameKo": "메타몽",
+      "types": [
+        "normal"
+      ],
+      "color": "purple",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 133,
+      "nameEn": "eevee",
+      "nameKo": "이브이",
+      "types": [
+        "normal"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 134,
+      "nameEn": "vaporeon",
+      "nameKo": "샤미드",
+      "types": [
+        "water"
+      ],
+      "color": "blue",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/134.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 135,
+      "nameEn": "jolteon",
+      "nameKo": "쥬피썬더",
+      "types": [
+        "electric"
+      ],
+      "color": "yellow",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/135.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 136,
+      "nameEn": "flareon",
+      "nameKo": "부스터",
+      "types": [
+        "fire"
+      ],
+      "color": "red",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/136.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 137,
+      "nameEn": "porygon",
+      "nameKo": "폴리곤",
+      "types": [
+        "normal"
+      ],
+      "color": "pink",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/137.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 138,
+      "nameEn": "omanyte",
+      "nameKo": "암나이트",
+      "types": [
+        "rock",
+        "water"
+      ],
+      "color": "blue",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/138.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 139,
+      "nameEn": "omastar",
+      "nameKo": "암스타",
+      "types": [
+        "rock",
+        "water"
+      ],
+      "color": "blue",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/139.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 140,
+      "nameEn": "kabuto",
+      "nameKo": "투구",
+      "types": [
+        "rock",
+        "water"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/140.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 141,
+      "nameEn": "kabutops",
+      "nameKo": "투구푸스",
+      "types": [
+        "rock",
+        "water"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/141.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 142,
+      "nameEn": "aerodactyl",
+      "nameKo": "프테라",
+      "types": [
+        "rock",
+        "flying"
+      ],
+      "color": "purple",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/142.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 143,
+      "nameEn": "snorlax",
+      "nameKo": "잠만보",
+      "types": [
+        "normal"
+      ],
+      "color": "black",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/143.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 144,
+      "nameEn": "articuno",
+      "nameKo": "프리져",
+      "types": [
+        "ice",
+        "flying"
+      ],
+      "color": "blue",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/144.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 145,
+      "nameEn": "zapdos",
+      "nameKo": "썬더",
+      "types": [
+        "electric",
+        "flying"
+      ],
+      "color": "yellow",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/145.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 146,
+      "nameEn": "moltres",
+      "nameKo": "파이어",
+      "types": [
+        "fire",
+        "flying"
+      ],
+      "color": "yellow",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/146.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 147,
+      "nameEn": "dratini",
+      "nameKo": "미뇽",
+      "types": [
+        "dragon"
+      ],
+      "color": "blue",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/147.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 148,
+      "nameEn": "dragonair",
+      "nameKo": "신뇽",
+      "types": [
+        "dragon"
+      ],
+      "color": "blue",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/148.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 149,
+      "nameEn": "dragonite",
+      "nameKo": "망나뇽",
+      "types": [
+        "dragon",
+        "flying"
+      ],
+      "color": "brown",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/149.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 150,
+      "nameEn": "mewtwo",
+      "nameKo": "뮤츠",
+      "types": [
+        "psychic"
+      ],
+      "color": "purple",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/150.png",
+      "imageVector": [],
+      "textVector": []
+    },
+    {
+      "id": 151,
+      "nameEn": "mew",
+      "nameKo": "뮤",
+      "types": [
+        "psychic"
+      ],
+      "color": "pink",
+      "vibe": null,
+      "artwork": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/151.png",
+      "imageVector": [],
+      "textVector": []
+    }
+  ]
+}

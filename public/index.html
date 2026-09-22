@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PokeMatch - 닮은꼴 포켓몬 찾기</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>PokeMatch: 닮은꼴 포켓몬 찾기</h1>
+
+  <!-- 사진 파일을 고르는 입력창 -->
+  <input type="file" id="photo-input" accept="image/jpeg,image/png,image/webp" />
+
+  <!-- 고른 사진을 미리 보여줄 영역 -->
+  <img id="preview" alt="미리보기" style="display: none;" />
+
+  <!-- 오류 메시지를 보여줄 영역 -->
+  <p id="error-message" style="display: none; color: red;"></p>
+
+  <!-- 찾기 버튼: 1단계에서는 /api/pokemon에서 무작위 3마리를 뽑아 보여준다 -->
+  <button id="find-button">닮은 포켓몬 찾기 (1단계: 무작위)</button>
+
+  <!-- 결과를 글자로 보여줄 영역 -->
+  <div id="result"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

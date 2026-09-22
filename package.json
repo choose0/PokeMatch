@@ -1,0 +1,17 @@
+{
+  "name": "pokematch",
+  "version": "1.0.0",
+  "description": "사진과 닮은 포켓몬을 찾아주는 웹 서비스",
+  "main": "src/local.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/local.js",
+    "build-data": "node scripts/build-data.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
