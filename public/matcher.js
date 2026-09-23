@@ -193,7 +193,8 @@ function toPercent(score) {
 }
 
 // 색/분위기가 같은 이유를 문장 2개로 만드는 함수
-function buildReasons(photoColor, photoVibe, pokemon) {
+// textScore, imageScore: 이 포켓몬과 사진의 설명글 점수·그림 점수 (색·분위기로 다 못 채울 때 구체적인 이유로 사용)
+function buildReasons(photoColor, photoVibe, pokemon, textScore, imageScore) {
   const reasons = [];
 
   if (photoColor.key === pokemon.color) {
@@ -201,6 +202,16 @@ function buildReasons(photoColor, photoVibe, pokemon) {
   }
   if (photoVibe.item.key === pokemon.vibe) {
     reasons.push(`둘 다 ${photoVibe.item.nameKo} 분위기예요`);
+  }
+
+  // 색·분위기가 안 맞으면, 그림 점수와 설명 점수 중 어느 쪽이 더 높은지 보고
+  // "생김새가 닮았다" 또는 "느낌·특징이 닮았다" 중 더 구체적인 이유를 골라준다
+  if (reasons.length < 2) {
+    if (imageScore >= textScore) {
+      reasons.push(`${pokemon.nameKo}의 생김새(그림)가 사진과 가장 비슷해요`);
+    } else {
+      reasons.push(`${pokemon.nameKo}의 특징·분위기가 사진과 가장 비슷해요`);
+    }
   }
   while (reasons.length < 2) {
     reasons.push("전체적인 인상이 가장 가까워요");
@@ -276,14 +287,14 @@ export async function findMatches(file, onProgress) {
     const finalScore =
       TEXT_WEIGHT * textScore + IMAGE_WEIGHT * imageScore + COLOR_WEIGHT * colorScore;
 
-    return { pokemon, finalScore };
+    return { pokemon, finalScore, textScore, imageScore };
   });
 
   scored.sort((a, b) => b.finalScore - a.finalScore);
   const top3 = scored.slice(0, 3);
 
   // 6) 화면에 보여줄 형태로 정리
-  return top3.map(({ pokemon, finalScore }) => ({
+  return top3.map(({ pokemon, finalScore, textScore, imageScore }) => ({
     id: pokemon.id,
     nameKo: pokemon.nameKo,
     nameEn: pokemon.nameEn,
@@ -292,6 +303,6 @@ export async function findMatches(file, onProgress) {
     generation: pokemon.generation,
     flavorText: pokemon.flavorText,
     matchPercent: toPercent(finalScore),
-    reasons: buildReasons(photoColor, photoVibe, pokemon),
+    reasons: buildReasons(photoColor, photoVibe, pokemon, textScore, imageScore),
   }));
 }
