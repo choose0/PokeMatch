@@ -34,9 +34,11 @@ const progressFill = document.getElementById("progress-fill");
 const top1Photo = document.getElementById("top1-photo");
 const top1Artwork = document.getElementById("top1-artwork");
 const top1Name = document.getElementById("top1-name");
+const top1Generation = document.getElementById("top1-generation");
 const matchBar = document.getElementById("match-bar");
 const top1Percent = document.getElementById("top1-percent");
 const top1Reasons = document.getElementById("top1-reasons");
+const top1Flavor = document.getElementById("top1-flavor");
 const restCards = document.getElementById("rest-cards");
 const retryButton = document.getElementById("retry-button");
 
@@ -155,11 +157,16 @@ function renderResult(photoFile, matches) {
   top1Artwork.src = first.artwork;
   top1Artwork.alt = first.nameKo;
   top1Name.textContent = `${first.nameKo} (${first.nameEn})`;
+  top1Generation.textContent = `${first.generation}세대`;
 
   matchBar.style.width = `${first.matchPercent}%`;
   top1Percent.textContent = `${first.matchPercent}% 닮았어요`;
 
   top1Reasons.innerHTML = first.reasons.map((r) => `<li>${r}</li>`).join("");
+
+  // 도감 설명이 없는 포켓몬도 있을 수 있으니 있을 때만 보여준다
+  top1Flavor.textContent = first.flavorText ? `"${first.flavorText}"` : "";
+  top1Flavor.hidden = !first.flavorText;
 
   // 카드 테두리에 쓸 타입 색은 style.css에 정의된 CSS 변수(--type-xxx)를 사용한다
   restCards.innerHTML = rest
@@ -168,7 +175,7 @@ function renderResult(photoFile, matches) {
         <div class="rest-card" style="border-color: var(--type-${m.types[0]})">
           <img src="${m.artwork}" alt="${m.nameKo}" class="rest-card-img" />
           <p class="rest-card-name">${m.nameKo}</p>
-          <p class="rest-card-percent">${m.matchPercent}%</p>
+          <p class="rest-card-sub">${m.generation}세대 · ${m.matchPercent}%</p>
         </div>
       `
     )

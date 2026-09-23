@@ -16,6 +16,19 @@ import {
 const POKEMON_COUNT = 649; // 1~5세대 전국도감 번호 (5세대 끝)
 const DATA_PATH = "data/pokemon.json";
 
+// PokéAPI의 "generation-i" 같은 이름을 숫자로 바꾸는 표
+const GENERATION_NUMBERS = {
+  i: 1,
+  ii: 2,
+  iii: 3,
+  iv: 4,
+  v: 5,
+  vi: 6,
+  vii: 7,
+  viii: 8,
+  ix: 9,
+};
+
 // 반드시 브라우저(public/matcher.js)와 같은 모델을 써야 벡터끼리 비교가 가능하다
 const MODEL_NAME = "Xenova/clip-vit-base-patch32";
 
@@ -64,12 +77,22 @@ async function fetchPokemonInfo(id) {
 
   const koName = speciesData.names.find((n) => n.language.name === "ko");
 
+  // 세대: "generation-i" → 1 처럼 숫자로 바꾼다
+  const generationKey = speciesData.generation.name.replace("generation-", "");
+  const generation = GENERATION_NUMBERS[generationKey] ?? null;
+
+  // 한국어 도감 설명 중 첫 번째 것을 고르고, 줄바꿈을 공백으로 바꿔 한 줄로 만든다
+  const koFlavor = speciesData.flavor_text_entries.find((f) => f.language.name === "ko");
+  const flavorText = koFlavor ? koFlavor.flavor_text.replace(/[\n\f\r]+/g, " ") : "";
+
   return {
     id,
     nameEn: pokemonData.name,
     nameKo: koName ? koName.name : pokemonData.name,
     types: pokemonData.types.map((t) => t.type.name),
     color: speciesData.color.name,
+    generation,
+    flavorText,
     artwork: pokemonData.sprites.other["official-artwork"].front_default,
   };
 }
@@ -89,9 +112,9 @@ async function embedText(tokenizer, textModel, text) {
   return normalize(Array.from(text_embeds.data));
 }
 
-// 이미 CLIP 계산까지 끝난 포켓몬인지 확인하는 함수
-// (중간에 스크립트가 멈춰도 처음부터 다시 계산하지 않도록)
-function isDone(entry) {
+// CLIP 벡터 계산까지 끝난 포켓몬인지 확인하는 함수
+// (중간에 스크립트가 멈춰도 벡터는 처음부터 다시 계산하지 않도록)
+function hasVectors(entry) {
   return (
     entry &&
     Array.isArray(entry.imageVector) &&
@@ -100,6 +123,12 @@ function isDone(entry) {
     entry.textVector.length > 0 &&
     entry.vibe
   );
+}
+
+// 벡터뿐 아니라 세대·도감 설명까지 전부 채워져 있는지 확인하는 함수
+// (이 경우에만 PokéAPI 요청 자체를 건너뛴다)
+function isFullyDone(entry) {
+  return hasVectors(entry) && entry.generation != null && Boolean(entry.flavorText);
 }
 
 // labels(사람 확인 문장 + 분위기 문장)의 벡터까지 이미 계산되어 있는지 확인하는 함수
@@ -168,14 +197,26 @@ async function main() {
   for (let id = 1; id <= POKEMON_COUNT; id++) {
     const existing = existingPokemonMap.get(id);
 
-    if (isDone(existing)) {
+    if (isFullyDone(existing)) {
       pokemonList.push(existing);
       console.log(`  ${id}/${POKEMON_COUNT} ${existing.nameKo} 이미 계산됨 (건너뜀)`);
       continue;
     }
 
-    // PokéAPI에서 이름·타입·색·그림 주소를 받아온다
+    // PokéAPI에서 이름·타입·색·세대·도감 설명·그림 주소를 받아온다
     const info = await fetchPokemonInfo(id);
+
+    // 벡터는 이미 계산되어 있으면 재사용하고, 세대·도감 설명만 새로 받은 것으로 채운다
+    if (hasVectors(existing)) {
+      pokemonList.push({
+        ...info,
+        vibe: existing.vibe,
+        imageVector: existing.imageVector,
+        textVector: existing.textVector,
+      });
+      console.log(`  ${id}/${POKEMON_COUNT} ${info.nameKo} 벡터는 재사용, 세대/도감 설명만 새로 받음`);
+      continue;
+    }
 
     // 그림 벡터 계산
     const imageVector = await embedImage(processor, visionModel, info.artwork);

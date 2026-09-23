@@ -289,6 +289,8 @@ export async function findMatches(file, onProgress) {
     nameEn: pokemon.nameEn,
     artwork: pokemon.artwork,
     types: pokemon.types, // 화면에서 타입별 색을 카드 테두리에 쓰기 위함
+    generation: pokemon.generation,
+    flavorText: pokemon.flavorText,
     matchPercent: toPercent(finalScore),
     reasons: buildReasons(photoColor, photoVibe, pokemon),
   }));

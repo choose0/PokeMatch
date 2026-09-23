@@ -233,10 +233,35 @@ body {
   color: var(--text-light);
 }
 
+.top1-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
 .top1-name {
   margin: 0;
   text-align: center;
   font-size: 20px;
+}
+
+.generation-tag {
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--primary-dark);
+  background: #fdecea;
+  border-radius: 999px;
+  padding: 2px 10px;
+  white-space: nowrap;
+}
+
+.flavor-text {
+  margin: 0;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--text-light);
+  text-align: center;
 }
 
 .match-bar-track {
@@ -311,7 +336,7 @@ body {
   text-overflow: ellipsis;
 }
 
-.rest-card-percent {
+.rest-card-sub {
   margin: 2px 0 0;
   font-size: 12px;
   color: var(--text-light);
