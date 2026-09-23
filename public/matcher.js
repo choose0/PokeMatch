@@ -15,14 +15,21 @@ const MODEL_NAME = "Xenova/clip-vit-base-patch32";
 // 사진을 줄일 긴 변 길이 (px)
 const RESIZE_MAX_SIDE = 512;
 
+// 색 판정에 쓸 가운데 영역의 비율 (0~1)
+// 4단계 시험에서 60%로 하면 인물 사진 뒤 배경(특히 회색 스튜디오 배경)까지 포함돼
+// 엉뚱한 색으로 판정되는 경우가 많았다. 얼굴 쪽으로 더 좁혀서 배경의 영향을 줄인다
+const COLOR_BOX_RATIO = 0.35;
+
 // 5장 공식: 최종 점수 = 0.5 × 설명 점수 + 0.4 × 그림 점수 + 0.1 × 색 점수
 const TEXT_WEIGHT = 0.5;
 const IMAGE_WEIGHT = 0.4;
 const COLOR_WEIGHT = 0.1;
 
 // 닮은 정도(0~100)로 바꿀 때 쓰는 유사도 범위
-const SIMILARITY_MIN = 0.15;
-const SIMILARITY_MAX = 0.35;
+// 4단계에서 사진 10장으로 실제 최종 점수를 재 보니 대부분 0.21~0.45 사이였다.
+// 원래 값(0.15~0.35)으로는 거의 모든 결과가 100%로 뭉쳐 보여서, 실제 분포에 맞게 조정했다
+const SIMILARITY_MIN = 0.2;
+const SIMILARITY_MAX = 0.42;
 
 // PokéAPI의 10가지 색 이름 → 한국어, 대표 RGB값
 // 대표 RGB값은 사진의 픽셀 색과 비교해서 "가장 가까운 색"을 고르는 데 쓴다
@@ -109,9 +116,9 @@ async function resizeToCanvas(file) {
 function detectDominantColor(canvas) {
   const ctx = canvas.getContext("2d");
 
-  // 가운데 60% 영역만 살펴본다 (배경보다 사진의 주요 대상이 있을 확률이 높음)
-  const boxW = Math.round(canvas.width * 0.6);
-  const boxH = Math.round(canvas.height * 0.6);
+  // 가운데 영역만 살펴본다 (배경보다 사진의 주요 대상이 있을 확률이 높음)
+  const boxW = Math.round(canvas.width * COLOR_BOX_RATIO);
+  const boxH = Math.round(canvas.height * COLOR_BOX_RATIO);
   const startX = Math.round((canvas.width - boxW) / 2);
   const startY = Math.round((canvas.height - boxH) / 2);
 
