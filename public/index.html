@@ -18,12 +18,13 @@
   <!-- 오류 메시지를 보여줄 영역 -->
   <p id="error-message" style="display: none; color: red;"></p>
 
-  <!-- 찾기 버튼: 1단계에서는 /api/pokemon에서 무작위 3마리를 뽑아 보여준다 -->
-  <button id="find-button">닮은 포켓몬 찾기 (1단계: 무작위)</button>
+  <!-- 찾기 버튼: 브라우저 안에서 CLIP으로 사진을 분석해 닮은 포켓몬 3마리를 찾는다 -->
+  <button id="find-button">닮은 포켓몬 찾기</button>
 
   <!-- 결과를 글자로 보여줄 영역 -->
   <div id="result"></div>
 
-  <script src="app.js"></script>
+  <!-- app.js가 import문을 쓰므로 type="module"이 꼭 필요하다 -->
+  <script type="module" src="app.js"></script>
 </body>
 </html>

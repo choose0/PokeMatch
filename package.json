@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@huggingface/transformers": "3.8.1",
     "express": "^5.2.1"
   }
 }

@@ -1,6 +1,16 @@
 // public/app.js
 // 화면(index.html)의 동작을 담당하는 파일.
-// 1단계에서는 딥러닝 없이, 사진 파일 검사 + 미리보기 + 서버 API에서 무작위 3마리 뽑기만 한다.
+// 사진 파일 검사 + 미리보기, 그리고 matcher.js로 실제 닮은꼴 판정을 실행한다.
+
+import { findMatches } from "./matcher.js";
+
+// 6-3 화면 오류 코드 → 사용자에게 보여줄 문구
+const ERROR_MESSAGES = {
+  BAD_FILE: "10MB 이하 JPG·PNG·WEBP만 올릴 수 있어요.",
+  NO_PERSON: "사람이 보이는 사진을 올려 주세요.",
+  MODEL_FAIL: "모델을 불러오지 못했어요. 인터넷 연결을 확인해 주세요.",
+  DATA_FAIL: "포켓몬 도감을 불러오지 못했어요.",
+};
 
 // 허용하는 파일 형식과 최대 크기 (PRD 6-3 BAD_FILE 기준)
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
@@ -36,9 +46,13 @@ function checkFile(file) {
   return null;
 }
 
+// 지금 선택된 파일을 기억해 둔다 (찾기 버튼을 눌렀을 때 사용)
+let selectedFile = null;
+
 // 사진 파일을 고를 때마다 실행되는 함수
 photoInput.addEventListener("change", () => {
   hideError();
+  resultDiv.textContent = "";
   const file = photoInput.files[0];
   if (!file) return;
 
@@ -48,42 +62,44 @@ photoInput.addEventListener("change", () => {
     showError(errorText);
     preview.style.display = "none";
     photoInput.value = ""; // 선택한 파일 지우기
+    selectedFile = null;
     return;
   }
 
-  // 문제없으면 미리보기로 보여준다
+  // 문제없으면 미리보기로 보여주고, 파일을 기억해 둔다
+  selectedFile = file;
   const imageUrl = URL.createObjectURL(file);
   preview.src = imageUrl;
   preview.style.display = "block";
 });
 
-// 배열에서 무작위로 n개를 뽑는 함수
-function pickRandom(array, n) {
-  // 원본을 건드리지 않도록 복사한 뒤 섞는다
-  const copied = [...array];
-  for (let i = copied.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [copied[i], copied[j]] = [copied[j], copied[i]];
-  }
-  return copied.slice(0, n);
-}
-
 // 찾기 버튼을 누르면 실행되는 함수
-// 1단계에서는 딥러닝 계산 없이 /api/pokemon에서 무작위 3마리만 보여준다
+// matcher.js가 브라우저 안에서 CLIP으로 사진을 분석해 닮은 포켓몬 3마리를 찾는다
 findButton.addEventListener("click", async () => {
-  resultDiv.textContent = "불러오는 중...";
+  hideError();
+
+  if (!selectedFile) {
+    showError("먼저 사진을 선택해 주세요.");
+    return;
+  }
+
+  // 처음 실행하면 CLIP 모델을 내려받아야 해서 시간이 걸릴 수 있다
+  resultDiv.textContent = "분석 중... (처음 한 번은 모델을 내려받아 오래 걸릴 수 있어요)";
 
   try {
-    const response = await fetch("/api/pokemon");
-    const data = await response.json();
-
-    const picked = pickRandom(data.pokemon, 3);
+    const matches = await findMatches(selectedFile);
 
     // 글자로만 결과를 보여준다 (꾸미기는 3단계에서)
-    resultDiv.innerHTML = picked
-      .map((p) => `<p>#${p.id} ${p.nameKo} (${p.nameEn}) - 색: ${p.color}</p>`)
+    resultDiv.innerHTML = matches
+      .map(
+        (m) =>
+          `<p>#${m.id} ${m.nameKo} (${m.nameEn}) - 닮은 정도 ${m.matchPercent}%<br>` +
+          `이유: ${m.reasons.join(", ")}</p>`
+      )
       .join("");
   } catch (err) {
-    resultDiv.textContent = "포켓몬 도감을 불러오지 못했어요.";
+    resultDiv.textContent = "";
+    const message = ERROR_MESSAGES[err?.code] ?? "알 수 없는 오류가 발생했어요.";
+    showError(message);
   }
 });
