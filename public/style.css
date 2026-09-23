@@ -51,6 +51,9 @@ body {
   font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
   /* 360px처럼 좁은 화면에서도 가로 스크롤이 생기지 않도록 */
   overflow-x: hidden;
+  /* 한글이 음절 단위로 잘리지 않고, 단어(어절) 단위로 줄바꿈되게 한다 */
+  word-break: keep-all;
+  overflow-wrap: break-word;
 }
 
 /* ---------- 도감(포켓덱스) 껍데기 ---------- */
