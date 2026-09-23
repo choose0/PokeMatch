@@ -1,19 +1,339 @@
 /* style.css
-   1단계는 뼈대만 확인하는 단계라서 꾸미기는 최소한으로만 한다.
-   본격적인 디자인은 3단계에서 다시 작업한다. */
+   3단계: 화면 디자인. CSS 라이브러리 없이 이 파일 하나로 전체 화면을 꾸민다.
+   Flexbox로 세로 배치를 하고, 360px 폭에서도 가로 스크롤이 생기지 않게 한다. */
+
+/* ---------- 색 변수 ---------- */
+:root {
+  --bg: #f4f5fb;
+  --card-bg: #ffffff;
+  --text: #2b2b3a;
+  --text-light: #6b6b7a;
+  --primary: #ef5350;
+  --primary-dark: #d3413e;
+  --border: #e3e3ee;
+
+  /* 포켓몬 타입별 색 (카드 테두리에 사용) */
+  --type-normal: #a8a878;
+  --type-fire: #f08030;
+  --type-water: #6890f0;
+  --type-electric: #f8d030;
+  --type-grass: #78c850;
+  --type-ice: #98d8d8;
+  --type-fighting: #c03028;
+  --type-poison: #a040a0;
+  --type-ground: #e0c068;
+  --type-flying: #a890f0;
+  --type-psychic: #f85888;
+  --type-bug: #a8b820;
+  --type-rock: #b8a038;
+  --type-ghost: #705898;
+  --type-dragon: #7038f8;
+  --type-dark: #705848;
+  --type-steel: #b8b8d0;
+  --type-fairy: #ee99ac;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* .card 같은 클래스가 display:flex를 주더라도, hidden 속성이 붙으면 항상 감춰지게 한다 */
+[hidden] {
+  display: none !important;
+}
 
 body {
-  font-family: sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  /* 360px처럼 좁은 화면에서도 가로 스크롤이 생기지 않도록 */
+  overflow-x: hidden;
+}
+
+.page {
   max-width: 480px;
-  margin: 40px auto;
-  padding: 0 16px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-#preview {
+/* ---------- 머리말 ---------- */
+.header {
+  text-align: center;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 28px;
+  color: var(--primary-dark);
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  color: var(--text-light);
+  font-size: 14px;
+}
+
+/* ---------- 공통 카드 ---------- */
+.card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ---------- 사진 선택 영역 ---------- */
+.upload-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 200px;
+  border: 2px dashed var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  padding: 12px;
+  text-align: center;
+  overflow: hidden;
+}
+
+.upload-hint {
+  color: var(--text-light);
+  font-size: 14px;
+}
+
+.preview {
   max-width: 100%;
-  margin: 12px 0;
+  max-height: 260px;
+  border-radius: 8px;
+  object-fit: contain;
 }
 
-#result {
-  margin-top: 16px;
+.privacy-note {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-light);
+  text-align: center;
+}
+
+.error-message {
+  margin: 0;
+  color: var(--primary-dark);
+  background: #fdecea;
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* ---------- 버튼 ---------- */
+.find-button,
+.retry-button {
+  border: none;
+  border-radius: 999px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background: var(--primary);
+  cursor: pointer;
+}
+
+.find-button:disabled {
+  background: var(--border);
+  color: var(--text-light);
+  cursor: not-allowed;
+}
+
+.find-button:not(:disabled):hover,
+.retry-button:hover {
+  background: var(--primary-dark);
+}
+
+/* ---------- 모델 다운로드 진행률 ---------- */
+.progress-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.progress-label {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-light);
+  text-align: center;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 10px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--primary);
+  transition: width 0.2s ease;
+}
+
+/* ---------- 분석 중 화면 ---------- */
+.loading-section {
+  align-items: center;
+  padding: 48px 20px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--border);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- 결과 화면: 1위 ---------- */
+.top1-compare {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.top1-photo,
+.top1-artwork {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 12px;
+  background: var(--bg);
+}
+
+.top1-artwork {
+  object-fit: contain;
+}
+
+.vs-mark {
+  font-size: 22px;
+  color: var(--text-light);
+}
+
+.top1-name {
+  margin: 0;
+  text-align: center;
+  font-size: 20px;
+}
+
+.match-bar-track {
+  width: 100%;
+  height: 14px;
+  background: var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.match-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+  transition: width 0.4s ease;
+}
+
+.match-percent {
+  margin: 0;
+  text-align: center;
+  font-weight: bold;
+}
+
+.reasons {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.fun-note {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-light);
+  text-align: center;
+}
+
+/* ---------- 결과 화면: 2·3위 ---------- */
+.rest-title {
+  margin: 4px 0 0;
+  font-size: 15px;
+  color: var(--text-light);
+}
+
+.rest-cards {
+  display: flex;
+  gap: 12px;
+}
+
+.rest-card {
+  flex: 1;
+  min-width: 0; /* 좁은 화면에서 카드가 넘치지 않도록 */
+  border: 3px solid var(--type-normal);
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  background: var(--bg);
+}
+
+.rest-card-img {
+  width: 100%;
+  max-width: 80px;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+}
+
+.rest-card-name {
+  margin: 4px 0 0;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rest-card-percent {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: var(--text-light);
+}
+
+/* ---------- 아주 좁은 화면(360px) 보정 ---------- */
+@media (max-width: 360px) {
+  .page {
+    padding: 16px 12px 32px;
+  }
+
+  .top1-photo,
+  .top1-artwork {
+    width: 90px;
+    height: 90px;
+  }
+}
+
+/* ---------- 넓은 화면(태블릿 이상)에서는 살짝 여유 있게 ---------- */
+@media (min-width: 768px) {
+  .page {
+    max-width: 560px;
+    padding-top: 48px;
+  }
 }

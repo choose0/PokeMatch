@@ -1,6 +1,7 @@
 // public/app.js
 // 화면(index.html)의 동작을 담당하는 파일.
-// 사진 파일 검사 + 미리보기, 그리고 matcher.js로 실제 닮은꼴 판정을 실행한다.
+// 화면은 4가지 상태를 오간다: 대기(사진 선택) → 모델 준비 → 분석 중 → 결과(또는 오류)
+// 실제 계산(CLIP, 점수 매기기)은 모두 matcher.js가 한다. 이 파일은 화면만 바꾼다.
 
 import { findMatches } from "./matcher.js";
 
@@ -17,21 +18,45 @@ const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const MAX_SIZE_BYTES = 10 * 1024 * 1024; // 10MB
 
 // 화면의 요소들을 미리 찾아 둔다
+const uploadSection = document.getElementById("upload-section");
+const loadingSection = document.getElementById("loading-section");
+const resultSection = document.getElementById("result-section");
+
 const photoInput = document.getElementById("photo-input");
 const preview = document.getElementById("preview");
+const uploadHint = document.getElementById("upload-hint");
 const errorMessage = document.getElementById("error-message");
 const findButton = document.getElementById("find-button");
-const resultDiv = document.getElementById("result");
 
-// 오류 메시지를 보여주는 함수
-function showError(text) {
-  errorMessage.textContent = text;
-  errorMessage.style.display = "block";
+const modelProgress = document.getElementById("model-progress");
+const progressFill = document.getElementById("progress-fill");
+
+const top1Photo = document.getElementById("top1-photo");
+const top1Artwork = document.getElementById("top1-artwork");
+const top1Name = document.getElementById("top1-name");
+const matchBar = document.getElementById("match-bar");
+const top1Percent = document.getElementById("top1-percent");
+const top1Reasons = document.getElementById("top1-reasons");
+const restCards = document.getElementById("rest-cards");
+const retryButton = document.getElementById("retry-button");
+
+// 지금 선택된 파일을 기억해 둔다 (찾기 버튼을 눌렀을 때 사용)
+let selectedFile = null;
+
+// 화면 상태 하나만 보이고 나머지는 숨기는 함수
+function showSection(section) {
+  uploadSection.hidden = section !== "upload";
+  loadingSection.hidden = section !== "loading";
+  resultSection.hidden = section !== "result";
 }
 
-// 오류 메시지를 감추는 함수
+function showError(text) {
+  errorMessage.textContent = text;
+  errorMessage.hidden = false;
+}
+
 function hideError() {
-  errorMessage.style.display = "none";
+  errorMessage.hidden = true;
   errorMessage.textContent = "";
 }
 
@@ -46,13 +71,9 @@ function checkFile(file) {
   return null;
 }
 
-// 지금 선택된 파일을 기억해 둔다 (찾기 버튼을 눌렀을 때 사용)
-let selectedFile = null;
-
 // 사진 파일을 고를 때마다 실행되는 함수
 photoInput.addEventListener("change", () => {
   hideError();
-  resultDiv.textContent = "";
   const file = photoInput.files[0];
   if (!file) return;
 
@@ -60,9 +81,11 @@ photoInput.addEventListener("change", () => {
   const errorText = checkFile(file);
   if (errorText) {
     showError(errorText);
-    preview.style.display = "none";
+    preview.hidden = true;
+    uploadHint.hidden = false;
     photoInput.value = ""; // 선택한 파일 지우기
     selectedFile = null;
+    findButton.disabled = true;
     return;
   }
 
@@ -70,36 +93,96 @@ photoInput.addEventListener("change", () => {
   selectedFile = file;
   const imageUrl = URL.createObjectURL(file);
   preview.src = imageUrl;
-  preview.style.display = "block";
+  preview.hidden = false;
+  uploadHint.hidden = true;
+  findButton.disabled = false;
 });
 
-// 찾기 버튼을 누르면 실행되는 함수
-// matcher.js가 브라우저 안에서 CLIP으로 사진을 분석해 닮은 포켓몬 3마리를 찾는다
-findButton.addEventListener("click", async () => {
-  hideError();
-
-  if (!selectedFile) {
-    showError("먼저 사진을 선택해 주세요.");
-    return;
+// 모델 내려받기 진행률을 표시하는 함수 (transformers.js의 progress_callback이 호출해 준다)
+// 파일마다 progress(0~100)를 따로 알려주므로, 파일별 진행률을 저장해 두고 평균을 낸다
+const fileProgress = new Map();
+function handleModelProgress(event) {
+  if (event.status === "progress") {
+    fileProgress.set(event.file, event.progress);
+  } else if (event.status === "done") {
+    fileProgress.set(event.file, 100);
+  } else {
+    return; // initiate, ready 같은 상태는 진행률 계산에 쓰지 않는다
   }
 
-  // 처음 실행하면 CLIP 모델을 내려받아야 해서 시간이 걸릴 수 있다
-  resultDiv.textContent = "분석 중... (처음 한 번은 모델을 내려받아 오래 걸릴 수 있어요)";
+  const values = Array.from(fileProgress.values());
+  const average = values.reduce((sum, v) => sum + v, 0) / values.length;
+  progressFill.style.width = `${average}%`;
+
+  // 모델 파일을 모두 받았으면(=100%), 진행률 표시를 감추고
+  // "도감을 뒤지는 중..." 분석 화면으로 바꾼다 (실제 벡터 계산은 이제부터 시작)
+  if (average >= 100) {
+    modelProgress.hidden = true;
+    showSection("loading");
+  }
+}
+
+// 찾기 버튼을 누르면 실행되는 함수
+findButton.addEventListener("click", async () => {
+  hideError();
+  if (!selectedFile) return;
+
+  // 버튼을 비활성화해서 분석 중에 여러 번 누르지 못하게 한다
+  findButton.disabled = true;
+
+  // 모델 내려받기 진행률 표시 시작
+  fileProgress.clear();
+  progressFill.style.width = "0%";
+  modelProgress.hidden = false;
 
   try {
-    const matches = await findMatches(selectedFile);
-
-    // 글자로만 결과를 보여준다 (꾸미기는 3단계에서)
-    resultDiv.innerHTML = matches
-      .map(
-        (m) =>
-          `<p>#${m.id} ${m.nameKo} (${m.nameEn}) - 닮은 정도 ${m.matchPercent}%<br>` +
-          `이유: ${m.reasons.join(", ")}</p>`
-      )
-      .join("");
+    const matches = await findMatches(selectedFile, handleModelProgress);
+    renderResult(selectedFile, matches);
   } catch (err) {
-    resultDiv.textContent = "";
+    modelProgress.hidden = true;
+    findButton.disabled = false;
+    showSection("upload");
     const message = ERROR_MESSAGES[err?.code] ?? "알 수 없는 오류가 발생했어요.";
     showError(message);
   }
+});
+
+// 결과를 화면에 그리는 함수
+function renderResult(photoFile, matches) {
+  const [first, ...rest] = matches;
+
+  top1Photo.src = URL.createObjectURL(photoFile);
+  top1Artwork.src = first.artwork;
+  top1Artwork.alt = first.nameKo;
+  top1Name.textContent = `${first.nameKo} (${first.nameEn})`;
+
+  matchBar.style.width = `${first.matchPercent}%`;
+  top1Percent.textContent = `${first.matchPercent}% 닮았어요`;
+
+  top1Reasons.innerHTML = first.reasons.map((r) => `<li>${r}</li>`).join("");
+
+  // 카드 테두리에 쓸 타입 색은 style.css에 정의된 CSS 변수(--type-xxx)를 사용한다
+  restCards.innerHTML = rest
+    .map(
+      (m) => `
+        <div class="rest-card" style="border-color: var(--type-${m.types[0]})">
+          <img src="${m.artwork}" alt="${m.nameKo}" class="rest-card-img" />
+          <p class="rest-card-name">${m.nameKo}</p>
+          <p class="rest-card-percent">${m.matchPercent}%</p>
+        </div>
+      `
+    )
+    .join("");
+
+  showSection("result");
+}
+
+// "다른 사진으로 다시 찾기" 버튼을 누르면 처음 화면으로 되돌아간다
+retryButton.addEventListener("click", () => {
+  selectedFile = null;
+  photoInput.value = "";
+  preview.hidden = true;
+  uploadHint.hidden = false;
+  findButton.disabled = true;
+  showSection("upload");
 });

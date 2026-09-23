@@ -43,12 +43,15 @@ const COLOR_TABLE = [
 let processorPromise = null;
 let visionModelPromise = null;
 
-function loadModels() {
+// onProgress: transformers.js가 모델 파일을 내려받을 때마다 진행 상황을 알려주는 콜백 (3단계 진행률 표시용)
+function loadModels(onProgress) {
   if (!processorPromise) {
-    processorPromise = AutoProcessor.from_pretrained(MODEL_NAME);
+    processorPromise = AutoProcessor.from_pretrained(MODEL_NAME, { progress_callback: onProgress });
   }
   if (!visionModelPromise) {
-    visionModelPromise = CLIPVisionModelWithProjection.from_pretrained(MODEL_NAME);
+    visionModelPromise = CLIPVisionModelWithProjection.from_pretrained(MODEL_NAME, {
+      progress_callback: onProgress,
+    });
   }
   return Promise.all([processorPromise, visionModelPromise]);
 }
@@ -146,8 +149,8 @@ function detectDominantColor(canvas) {
 }
 
 // 사진(canvas)을 CLIP 이미지 벡터로 바꾸는 함수
-async function embedPhoto(canvas) {
-  const [processor, visionModel] = await loadModels();
+async function embedPhoto(canvas, onProgress) {
+  const [processor, visionModel] = await loadModels(onProgress);
   const image = await RawImage.fromCanvas(canvas);
   const inputs = await processor(image);
   const { image_embeds } = await visionModel(inputs);
@@ -177,8 +180,9 @@ function buildReasons(photoColor, photoVibe, pokemon) {
 }
 
 // 사진 파일을 받아 닮은 포켓몬 top 3를 돌려주는 메인 함수
+// onProgress: 모델을 내려받는 동안 진행 상황을 화면에 보여주기 위한 콜백 (생략 가능)
 // 실패하면 { code: "BAD_FILE" | "NO_PERSON" | "MODEL_FAIL" | "DATA_FAIL" } 형태의 에러를 던진다
-export async function findMatches(file) {
+export async function findMatches(file, onProgress) {
   // 1) 서버에서 판정용 문장 벡터와 포켓몬 목록을 받아온다
   let labelsData;
   let pokemonData;
@@ -203,7 +207,7 @@ export async function findMatches(file) {
   let canvas;
   try {
     canvas = await resizeToCanvas(file);
-    photoVector = await embedPhoto(canvas);
+    photoVector = await embedPhoto(canvas, onProgress);
   } catch {
     throw { code: "MODEL_FAIL" };
   }
@@ -239,6 +243,7 @@ export async function findMatches(file) {
     nameKo: pokemon.nameKo,
     nameEn: pokemon.nameEn,
     artwork: pokemon.artwork,
+    types: pokemon.types, // 화면에서 타입별 색을 카드 테두리에 쓰기 위함
     matchPercent: toPercent(finalScore),
     reasons: buildReasons(photoColor, photoVibe, pokemon),
   }));
