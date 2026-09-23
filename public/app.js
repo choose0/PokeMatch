@@ -39,6 +39,7 @@ const matchBar = document.getElementById("match-bar");
 const top1Percent = document.getElementById("top1-percent");
 const top1Reasons = document.getElementById("top1-reasons");
 const top1Flavor = document.getElementById("top1-flavor");
+const flavorBox = document.getElementById("flavor-box");
 const restCards = document.getElementById("rest-cards");
 const retryButton = document.getElementById("retry-button");
 
@@ -166,7 +167,7 @@ function renderResult(photoFile, matches) {
 
   // 도감 설명이 없는 포켓몬도 있을 수 있으니 있을 때만 보여준다
   top1Flavor.textContent = first.flavorText ? `"${first.flavorText}"` : "";
-  top1Flavor.hidden = !first.flavorText;
+  flavorBox.hidden = !first.flavorText;
 
   // 카드 테두리에 쓸 타입 색은 style.css에 정의된 CSS 변수(--type-xxx)를 사용한다
   restCards.innerHTML = rest

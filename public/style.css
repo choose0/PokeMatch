@@ -2,17 +2,19 @@
    3단계: 화면 디자인. CSS 라이브러리 없이 이 파일 하나로 전체 화면을 꾸민다.
    Flexbox로 세로 배치를 하고, 360px 폭에서도 가로 스크롤이 생기지 않게 한다. */
 
-/* ---------- 색 변수 ---------- */
+/* ---------- 색 변수 (포켓몬 도감 레드 팔레트) ---------- */
 :root {
-  --bg: #f4f5fb;
+  --bg: #fff5f0;
   --card-bg: #ffffff;
-  --text: #2b2b3a;
-  --text-light: #6b6b7a;
-  --primary: #ef5350;
-  --primary-dark: #d3413e;
-  --border: #e3e3ee;
+  --text: #2b1d1d;
+  --text-light: #8a6f6f;
+  --primary: #e63946;
+  --primary-dark: #b32d38;
+  --accent: #e63946; /* 강조색(포인트). 기본은 primary와 같음 */
+  --border: #f1d9d3;
+  --box-bg: #fff0ea; /* 이유·도감 설명 같은 안쪽 박스 배경 */
 
-  /* 포켓몬 타입별 색 (카드 테두리에 사용) */
+  /* 포켓몬 타입별 색 (카드 테두리에 사용, 게임 공식 색이라 팔레트와 무관하게 고정) */
   --type-normal: #a8a878;
   --type-fire: #f08030;
   --type-water: #6890f0;
@@ -82,10 +84,11 @@ body {
   background: var(--card-bg);
   border-radius: 16px;
   padding: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
   display: flex;
   flex-direction: column;
   gap: 12px;
+  border-top: 4px solid var(--accent);
 }
 
 /* ---------- 사진 선택 영역 ---------- */
@@ -102,6 +105,12 @@ body {
   padding: 12px;
   text-align: center;
   overflow: hidden;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.upload-box:hover {
+  border-color: var(--accent);
+  background: var(--box-bg);
 }
 
 .upload-hint {
@@ -126,7 +135,8 @@ body {
 .error-message {
   margin: 0;
   color: var(--primary-dark);
-  background: #fdecea;
+  background: var(--box-bg);
+  border: 1px solid var(--border);
   border-radius: 8px;
   padding: 8px 12px;
   font-size: 14px;
@@ -144,12 +154,14 @@ body {
   color: white;
   background: var(--primary);
   cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
 }
 
 .find-button:disabled {
   background: var(--border);
   color: var(--text-light);
   cursor: not-allowed;
+  box-shadow: none;
 }
 
 .find-button:not(:disabled):hover,
@@ -212,7 +224,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 14px;
 }
 
 .top1-photo,
@@ -221,7 +233,8 @@ body {
   height: 110px;
   object-fit: cover;
   border-radius: 12px;
-  background: var(--bg);
+  background: var(--box-bg);
+  border: 1px solid var(--border);
 }
 
 .top1-artwork {
@@ -229,8 +242,17 @@ body {
 }
 
 .vs-mark {
-  font-size: 22px;
-  color: var(--text-light);
+  width: 30px;
+  height: 30px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: bold;
+  color: white;
+  background: var(--accent);
+  border-radius: 50%;
 }
 
 .top1-title {
@@ -250,22 +272,11 @@ body {
   font-size: 12px;
   font-weight: bold;
   color: var(--primary-dark);
-  background: #fdecea;
+  background: var(--box-bg);
+  border: 1px solid var(--border);
   border-radius: 999px;
   padding: 2px 10px;
   white-space: nowrap;
-}
-
-.flavor-box {
-  margin: 0;
-  font-size: 13px;
-  font-style: italic;
-  color: var(--text);
-  text-align: center;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 10px 14px;
 }
 
 .match-bar-track {
@@ -279,7 +290,7 @@ body {
 .match-bar-fill {
   height: 100%;
   width: 0%;
-  background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+  background: linear-gradient(90deg, var(--primary), var(--accent));
   transition: width 0.4s ease;
 }
 
@@ -289,10 +300,39 @@ body {
   font-weight: bold;
 }
 
+/* ---------- 이유 박스 / 도감 설명 박스 (공통 스타일) ---------- */
+.reasons-box,
+.flavor-box {
+  background: var(--box-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.box-label {
+  margin: 0 0 6px;
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
 .reasons {
   margin: 0;
-  padding-left: 20px;
+  padding-left: 18px;
   font-size: 14px;
+  color: var(--text);
+}
+
+.reasons li + li {
+  margin-top: 4px;
+}
+
+.flavor-text {
+  margin: 0;
+  font-size: 13px;
+  font-style: italic;
   color: var(--text);
 }
 
@@ -322,7 +362,7 @@ body {
   border-radius: 12px;
   padding: 10px;
   text-align: center;
-  background: var(--bg);
+  background: var(--box-bg);
 }
 
 .rest-card-img {
