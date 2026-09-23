@@ -4,82 +4,112 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PokeMatch - 닮은꼴 포켓몬 찾기</title>
+  <!-- 제목에 쓸 볼드한 구글 폰트 (Baloo 2) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <main class="page">
-    <header class="header">
-      <h1>PokeMatch</h1>
-      <p class="subtitle">내 사진과 닮은 포켓몬을 찾아드려요</p>
-    </header>
+  <!-- 도감(포켓덱스) 컨셉의 바깥 껍데기. 안쪽 "화면" 안에 실제 내용이 들어간다 -->
+  <div class="pokedex-shell">
+    <div class="device-top">
+      <!-- 포켓덱스 렌즈처럼 보이는 장식용 원 -->
+      <span class="device-lens" aria-hidden="true"></span>
+      <span class="device-dots" aria-hidden="true">
+        <span class="device-dot device-dot--red"></span>
+        <span class="device-dot device-dot--yellow"></span>
+        <span class="device-dot device-dot--green"></span>
+      </span>
+    </div>
 
-    <!-- 화면 상태 1: 사진 고르기 (대기 중) -->
-    <section id="upload-section" class="card">
-      <!-- label로 감싸서 사진 영역을 눌러도 파일 선택창이 열리게 한다 -->
-      <label for="photo-input" class="upload-box">
-        <img id="preview" class="preview" alt="선택한 사진 미리보기" hidden />
-        <span id="upload-hint" class="upload-hint">눌러서 사진 선택 (카메라도 가능)</span>
-      </label>
-      <!-- accept="image/*"여야 휴대폰에서 카메라 옵션도 같이 나온다. 정확한 형식 검사는 app.js에서 한다 -->
-      <input type="file" id="photo-input" accept="image/*" hidden />
+    <main class="page">
+      <header class="header">
+        <h1>
+          <!-- 몬스터볼 아이콘 (외부 이미지 없이 SVG로 직접 그림) -->
+          <svg class="pokeball-icon" viewBox="0 0 48 48" aria-hidden="true">
+            <circle cx="24" cy="24" r="21" fill="#fff" stroke="#2b1d1d" stroke-width="2.5" />
+            <path d="M3 24a21 21 0 0 1 42 0Z" fill="#e63946" stroke="#2b1d1d" stroke-width="2.5" />
+            <rect x="3" y="22" width="42" height="4" fill="#2b1d1d" />
+            <circle cx="24" cy="24" r="7" fill="#fff" stroke="#2b1d1d" stroke-width="2.5" />
+            <circle cx="24" cy="24" r="3" fill="#fff" stroke="#2b1d1d" stroke-width="2" />
+          </svg>
+          PokeMatch
+        </h1>
+        <p class="subtitle">내 사진과 닮은 포켓몬을 찾아드려요</p>
+      </header>
 
-      <p class="privacy-note">🔒 사진은 이 기기 안에서만 분석되고 어디에도 전송되지 않아요.</p>
+      <!-- 도감 "화면" 영역: 실제 카드들은 전부 이 안에 들어간다 -->
+      <div class="device-screen">
+        <!-- 화면 상태 1: 사진 고르기 (대기 중) -->
+        <section id="upload-section" class="card">
+          <!-- label로 감싸서 사진 영역을 눌러도 파일 선택창이 열리게 한다 -->
+          <label for="photo-input" class="upload-box">
+            <img id="preview" class="preview" alt="선택한 사진 미리보기" hidden />
+            <span id="upload-hint" class="upload-hint">눌러서 사진 선택 (카메라도 가능)</span>
+          </label>
+          <!-- accept="image/*"여야 휴대폰에서 카메라 옵션도 같이 나온다. 정확한 형식 검사는 app.js에서 한다 -->
+          <input type="file" id="photo-input" accept="image/*" hidden />
 
-      <!-- 화면 상태 2: 모델 내려받는 중 (find-button을 처음 누르면 나타남) -->
-      <div id="model-progress" class="progress-wrap" hidden>
-        <p class="progress-label">
-          CLIP 모델을 준비하는 중... <br />(처음 한 번만 시간이 걸리고, 다음부터는 빨라져요)
-        </p>
-        <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+          <p class="privacy-note">🔒 사진은 이 기기 안에서만 분석되고 어디에도 전송되지 않아요.</p>
+
+          <!-- 화면 상태 2: 모델 내려받는 중 (find-button을 처음 누르면 나타남) -->
+          <div id="model-progress" class="progress-wrap" hidden>
+            <p class="progress-label">
+              CLIP 모델을 준비하는 중... <br />(처음 한 번만 시간이 걸리고, 다음부터는 빨라져요)
+            </p>
+            <div class="progress-bar"><div id="progress-fill" class="progress-fill"></div></div>
+          </div>
+
+          <p id="error-message" class="error-message" hidden></p>
+
+          <button id="find-button" class="find-button" disabled>닮은 포켓몬 찾기</button>
+        </section>
+
+        <!-- 화면 상태 3: 분석 중 -->
+        <section id="loading-section" class="card loading-section" hidden>
+          <div class="spinner" aria-hidden="true"></div>
+          <p>도감을 뒤지는 중...</p>
+        </section>
+
+        <!-- 화면 상태 4: 결과 -->
+        <section id="result-section" class="card result-section" hidden>
+          <div class="top1-compare">
+            <img id="top1-photo" class="top1-photo" alt="내가 올린 사진" />
+            <span class="vs-mark" aria-hidden="true">≈</span>
+            <img id="top1-artwork" class="top1-artwork" alt="" />
+          </div>
+
+          <div class="top1-title">
+            <h2 id="top1-name" class="top1-name"></h2>
+            <span id="top1-generation" class="generation-tag"></span>
+          </div>
+
+          <div class="match-bar-track">
+            <div id="match-bar" class="match-bar-fill"></div>
+          </div>
+          <p id="top1-percent" class="match-percent"></p>
+
+          <div class="reasons-box">
+            <p class="box-label">왜 닮았을까요?</p>
+            <ul id="top1-reasons" class="reasons"></ul>
+          </div>
+
+          <!-- PokéAPI 도감 설명(한국어) -->
+          <div id="flavor-box" class="flavor-box">
+            <p class="box-label">도감 설명</p>
+            <p id="top1-flavor" class="flavor-text"></p>
+          </div>
+
+          <h3 class="rest-title">그 다음으로 닮은 포켓몬</h3>
+          <div id="rest-cards" class="rest-cards"></div>
+
+          <button id="retry-button" class="retry-button">다른 사진으로 다시 찾기</button>
+          <p class="fun-note">※ 재미로 보는 수치예요</p>
+        </section>
       </div>
-
-      <p id="error-message" class="error-message" hidden></p>
-
-      <button id="find-button" class="find-button" disabled>닮은 포켓몬 찾기</button>
-    </section>
-
-    <!-- 화면 상태 3: 분석 중 -->
-    <section id="loading-section" class="card loading-section" hidden>
-      <div class="spinner" aria-hidden="true"></div>
-      <p>도감을 뒤지는 중...</p>
-    </section>
-
-    <!-- 화면 상태 4: 결과 -->
-    <section id="result-section" class="card result-section" hidden>
-      <div class="top1-compare">
-        <img id="top1-photo" class="top1-photo" alt="내가 올린 사진" />
-        <span class="vs-mark" aria-hidden="true">≈</span>
-        <img id="top1-artwork" class="top1-artwork" alt="" />
-      </div>
-
-      <div class="top1-title">
-        <h2 id="top1-name" class="top1-name"></h2>
-        <span id="top1-generation" class="generation-tag"></span>
-      </div>
-
-      <div class="match-bar-track">
-        <div id="match-bar" class="match-bar-fill"></div>
-      </div>
-      <p id="top1-percent" class="match-percent"></p>
-
-      <div class="reasons-box">
-        <p class="box-label">왜 닮았을까요?</p>
-        <ul id="top1-reasons" class="reasons"></ul>
-      </div>
-
-      <!-- PokéAPI 도감 설명(한국어) -->
-      <div id="flavor-box" class="flavor-box">
-        <p class="box-label">도감 설명</p>
-        <p id="top1-flavor" class="flavor-text"></p>
-      </div>
-
-      <h3 class="rest-title">그 다음으로 닮은 포켓몬</h3>
-      <div id="rest-cards" class="rest-cards"></div>
-
-      <button id="retry-button" class="retry-button">다른 사진으로 다시 찾기</button>
-      <p class="fun-note">※ 재미로 보는 수치예요</p>
-    </section>
-  </main>
+    </main>
+  </div>
 
   <!-- app.js가 import문을 쓰므로 type="module"이 꼭 필요하다 -->
   <script type="module" src="app.js"></script>
