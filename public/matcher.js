@@ -26,10 +26,9 @@ const IMAGE_WEIGHT = 0.4;
 const COLOR_WEIGHT = 0.1;
 
 // 닮은 정도(0~100)로 바꿀 때 쓰는 유사도 범위
-// 4단계에서 사진 10장으로 실제 최종 점수를 재 보니 대부분 0.21~0.45 사이였다.
-// 원래 값(0.15~0.35)으로는 거의 모든 결과가 100%로 뭉쳐 보여서, 실제 분포에 맞게 조정했다
-const SIMILARITY_MIN = 0.2;
-const SIMILARITY_MAX = 0.42;
+// 649마리로 늘린 뒤, 센터링 보정(아래 설명)을 적용한 점수 분포(대략 0~0.25)에 맞춰 조정했다
+const SIMILARITY_MIN = 0;
+const SIMILARITY_MAX = 0.25;
 
 // PokéAPI의 10가지 색 이름 → 한국어, 대표 RGB값
 // 대표 RGB값은 사진의 픽셀 색과 비교해서 "가장 가까운 색"을 고르는 데 쓴다
@@ -72,6 +71,29 @@ function normalize(vector) {
 // 정규화된 두 벡터의 내적(= 코사인 유사도)
 function dot(a, b) {
   return a.reduce((sum, v, i) => sum + v * b[i], 0);
+}
+
+// 벡터 a에서 벡터 b를 빼는 함수 (센터링에 사용)
+function subtract(a, b) {
+  return a.map((v, i) => v - b[i]);
+}
+
+// 여러 벡터의 평균(중심)을 구하는 함수
+function meanVector(vectors) {
+  const dimension = vectors[0].length;
+  const sum = new Array(dimension).fill(0);
+  for (const vector of vectors) {
+    for (let i = 0; i < dimension; i++) sum[i] += vector[i];
+  }
+  return sum.map((v) => v / vectors.length);
+}
+
+// 포켓몬 벡터 전체의 "평균 방향"을 구해서 빼는 보정 (센터링)
+// 사진이 배경이나 형태가 단순하면, CLIP이 유명하거나 흔한 포켓몬(예: 피카츄, 코일)에게
+// 항상 비슷하게 높은 점수를 주는 경향이 있었다. 평균 방향을 미리 구해서 빼 주면
+// "모든 포켓몬과 공통으로 비슷한 정도"는 지우고, 그 사진만의 특징이 더 잘 드러난다
+function center(vectors, mean) {
+  return vectors.map((v) => normalize(subtract(v, mean)));
 }
 
 // 후보 목록 중 photoVector와 가장 유사도가 높은 항목을 찾는 함수 (제로샷 분류에 사용)
@@ -230,9 +252,25 @@ export async function findMatches(file, onProgress) {
   const photoVibe = findBestMatch(photoVector, labelsData.labels.vibe);
 
   // 5) 포켓몬 전체와 점수 계산
-  const scored = pokemonData.pokemon.map((pokemon) => {
-    const textScore = dot(photoVector, pokemon.textVector);
-    const imageScore = dot(photoVector, pokemon.imageVector);
+  // 설명 점수·그림 점수는 센터링(평균 방향 빼기)을 적용해서 비교한다
+  const meanImageVector = meanVector(pokemonData.pokemon.map((p) => p.imageVector));
+  const meanTextVector = meanVector(pokemonData.pokemon.map((p) => p.textVector));
+
+  const centeredImageVectors = center(
+    pokemonData.pokemon.map((p) => p.imageVector),
+    meanImageVector
+  );
+  const centeredTextVectors = center(
+    pokemonData.pokemon.map((p) => p.textVector),
+    meanTextVector
+  );
+
+  const centeredPhotoForImage = normalize(subtract(photoVector, meanImageVector));
+  const centeredPhotoForText = normalize(subtract(photoVector, meanTextVector));
+
+  const scored = pokemonData.pokemon.map((pokemon, index) => {
+    const textScore = dot(centeredPhotoForText, centeredTextVectors[index]);
+    const imageScore = dot(centeredPhotoForImage, centeredImageVectors[index]);
     const colorScore = photoColor.key === pokemon.color ? 1 : 0;
 
     const finalScore =
