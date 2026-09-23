@@ -1,5 +1,5 @@
 // build-data.js
-// PokéAPI에서 1~151번 포켓몬 정보를 받아오고, CLIP 모델로 벡터(임베딩)까지 계산해
+// PokéAPI에서 1~649번(1~5세대) 포켓몬 정보를 받아오고, CLIP 모델로 벡터(임베딩)까지 계산해
 // data/pokemon.json 파일로 저장하는 스크립트.
 // 내 컴퓨터에서 실행한다: npm run build-data
 // 2단계: CLIP으로 그림 벡터·설명글 벡터·분위기·판정용 문장 벡터를 채운다.
@@ -13,7 +13,7 @@ import {
   RawImage,
 } from "@huggingface/transformers";
 
-const POKEMON_COUNT = 151; // 1세대 포켓몬 수
+const POKEMON_COUNT = 649; // 1~5세대 전국도감 번호 (5세대 끝)
 const DATA_PATH = "data/pokemon.json";
 
 // 반드시 브라우저(public/matcher.js)와 같은 모델을 써야 벡터끼리 비교가 가능하다

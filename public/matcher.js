@@ -229,7 +229,7 @@ export async function findMatches(file, onProgress) {
   const photoColor = detectDominantColor(canvas);
   const photoVibe = findBestMatch(photoVector, labelsData.labels.vibe);
 
-  // 5) 151마리와 점수 계산
+  // 5) 포켓몬 전체와 점수 계산
   const scored = pokemonData.pokemon.map((pokemon) => {
     const textScore = dot(photoVector, pokemon.textVector);
     const imageScore = dot(photoVector, pokemon.imageVector);
