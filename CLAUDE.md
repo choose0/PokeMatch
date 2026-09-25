@@ -5,7 +5,7 @@ PokeMatch 작업 시 필요한 맥락만 짧게 정리한 문서. 설치법·구
 
 ## 이 프로젝트가 뭔지
 
-사진 1장 → CLIP으로 가장 닮은 포켓몬 3마리(1~5세대, 649마리)를 찾아주는 웹앱.
+사람·강아지 사진 1장 → CLIP으로 가장 닮은 포켓몬 3마리(1~5세대, 649마리)를 찾아주는 웹앱.
 사진 분석은 전부 브라우저(`public/matcher.js`)에서 하고, 서버(`src/app.js`)는
 미리 계산해 둔 `data/pokemon.json`을 내려주기만 한다. Vercel에 배포됨
 (GitHub: `choose0/PokeMatch`, 주소: `https://poke-match-alpha.vercel.app`).

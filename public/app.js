@@ -8,7 +8,7 @@ import { findMatches } from "./matcher.js";
 // 6-3 화면 오류 코드 → 사용자에게 보여줄 문구
 const ERROR_MESSAGES = {
   BAD_FILE: "10MB 이하 JPG·PNG·WEBP만 올릴 수 있어요.",
-  NO_PERSON: "사람이 보이는 사진을 올려 주세요.",
+  NO_SUBJECT: "사람이나 강아지가 보이는 사진을 올려 주세요.",
   MODEL_FAIL: "모델을 불러오지 못했어요. 인터넷 연결을 확인해 주세요.",
   DATA_FAIL: "포켓몬 도감을 불러오지 못했어요.",
 };
@@ -139,7 +139,7 @@ findButton.addEventListener("click", async () => {
   modelProgress.hidden = false;
 
   try {
-    const matches = await findMatches(selectedFile, handleModelProgress);
+    const { matches } = await findMatches(selectedFile, handleModelProgress);
     renderResult(selectedFile, matches);
   } catch (err) {
     modelProgress.hidden = true;

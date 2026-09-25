@@ -30,6 +30,10 @@ const COLOR_WEIGHT = 0.1;
 const SIMILARITY_MIN = 0;
 const SIMILARITY_MAX = 0.25;
 
+// 이 사진 대상들만 포켓몬을 찾아준다 (build-data.js의 SUBJECT_LABELS 중에서)
+// 나중에 고양이 등으로 넓히려면 여기에 key를 추가하면 된다
+const ALLOWED_SUBJECTS = ["person", "dog"];
+
 // PokéAPI의 10가지 색 이름 → 한국어, 대표 RGB값
 // 대표 RGB값은 사진의 픽셀 색과 비교해서 "가장 가까운 색"을 고르는 데 쓴다
 const COLOR_TABLE = [
@@ -194,11 +198,13 @@ function toPercent(score) {
 
 // 색/분위기가 같은 이유를 문장 2개로 만드는 함수
 // textScore, imageScore: 이 포켓몬과 사진의 설명글 점수·그림 점수 (색·분위기로 다 못 채울 때 구체적인 이유로 사용)
-function buildReasons(photoColor, photoVibe, pokemon, textScore, imageScore) {
+// subject: "person" 또는 "dog" (강아지면 "사진의 주된 색" 대신 "털색"이라고 말한다)
+function buildReasons(photoColor, photoVibe, pokemon, textScore, imageScore, subject) {
   const reasons = [];
+  const colorWord = subject === "dog" ? "강아지의 털색" : "사진의 주된 색";
 
   if (photoColor.key === pokemon.color) {
-    reasons.push(`사진의 주된 색(${photoColor.nameKo})이 ${pokemon.nameKo}와 같아요`);
+    reasons.push(`${colorWord}(${photoColor.nameKo})이 ${pokemon.nameKo}와 같아요`);
   }
   if (photoVibe.item.key === pokemon.vibe) {
     reasons.push(`둘 다 ${photoVibe.item.nameKo} 분위기예요`);
@@ -219,9 +225,18 @@ function buildReasons(photoColor, photoVibe, pokemon, textScore, imageScore) {
   return reasons.slice(0, 2);
 }
 
+// 강아지 사진의 털색을 CLIP으로 정하는 함수
+// 픽셀 색을 세는 방식은 베이지·황금색 털을 "회색"으로 잘못 잡는 경우가 많아서,
+// "a photo of a brown dog" 같은 문장 중 사진과 가장 가까운 것을 고른다
+function detectDogColor(photoVector, dogColorLabels) {
+  const best = findBestMatch(photoVector, dogColorLabels);
+  return COLOR_TABLE.find((color) => color.key === best.item.key);
+}
+
 // 사진 파일을 받아 닮은 포켓몬 top 3를 돌려주는 메인 함수
 // onProgress: 모델을 내려받는 동안 진행 상황을 화면에 보여주기 위한 콜백 (생략 가능)
-// 실패하면 { code: "BAD_FILE" | "NO_PERSON" | "MODEL_FAIL" | "DATA_FAIL" } 형태의 에러를 던진다
+// 성공하면 { subject: "person" | "dog", matches: [top3] } 를 돌려준다
+// 실패하면 { code: "BAD_FILE" | "NO_SUBJECT" | "MODEL_FAIL" | "DATA_FAIL" } 형태의 에러를 던진다
 export async function findMatches(file, onProgress) {
   // 1) 서버에서 판정용 문장 벡터와 포켓몬 목록을 받아온다
   let labelsData;
@@ -252,14 +267,19 @@ export async function findMatches(file, onProgress) {
     throw { code: "MODEL_FAIL" };
   }
 
-  // 3) 사람이 있는 사진인지 확인 (제로샷 분류)
+  // 3) 사람이나 강아지가 있는 사진인지 확인 (제로샷 분류)
   const subjectMatch = findBestMatch(photoVector, labelsData.labels.subject);
-  if (subjectMatch.item.key !== "person") {
-    throw { code: "NO_PERSON" };
+  const subject = subjectMatch.item.key;
+  if (!ALLOWED_SUBJECTS.includes(subject)) {
+    throw { code: "NO_SUBJECT" };
   }
 
   // 4) 사진의 주된 색과 분위기를 정한다
-  const photoColor = detectDominantColor(canvas);
+  // 강아지는 CLIP으로 털색을, 사람은 사진 가운데 픽셀 색을 본다
+  const photoColor =
+    subject === "dog"
+      ? detectDogColor(photoVector, labelsData.labels.dogColor)
+      : detectDominantColor(canvas);
   const photoVibe = findBestMatch(photoVector, labelsData.labels.vibe);
 
   // 5) 포켓몬 전체와 점수 계산
@@ -293,8 +313,8 @@ export async function findMatches(file, onProgress) {
   scored.sort((a, b) => b.finalScore - a.finalScore);
   const top3 = scored.slice(0, 3);
 
-  // 6) 화면에 보여줄 형태로 정리
-  return top3.map(({ pokemon, finalScore, textScore, imageScore }) => ({
+  // 6) 화면에 보여줄 형태로 정리 (subject: 사진에 찍힌 대상, "person" 또는 "dog")
+  const matches = top3.map(({ pokemon, finalScore, textScore, imageScore }) => ({
     id: pokemon.id,
     nameKo: pokemon.nameKo,
     nameEn: pokemon.nameEn,
@@ -303,6 +323,7 @@ export async function findMatches(file, onProgress) {
     generation: pokemon.generation,
     flavorText: pokemon.flavorText,
     matchPercent: toPercent(finalScore),
-    reasons: buildReasons(photoColor, photoVibe, pokemon, textScore, imageScore),
+    reasons: buildReasons(photoColor, photoVibe, pokemon, textScore, imageScore, subject),
   }));
+  return { subject, matches };
 }

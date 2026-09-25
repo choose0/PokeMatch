@@ -32,13 +32,26 @@ const GENERATION_NUMBERS = {
 // 반드시 브라우저(public/matcher.js)와 같은 모델을 써야 벡터끼리 비교가 가능하다
 const MODEL_NAME = "Xenova/clip-vit-base-patch32";
 
-// 사람이 있는 사진인지 확인하는 제로샷 분류용 문장 4개
+// 사진에 무엇이 찍혔는지 확인하는 제로샷 분류용 문장 6개
+// person, dog만 통과시키고 나머지는 거절한다 (matcher.js의 ALLOWED_SUBJECTS)
+// cat은 통과용이 아니라, 고양이 사진이 dog로 잘못 분류되지 않도록 넣어둔 "비교용" 문장이다
 const SUBJECT_LABELS = [
   { key: "person", text: "a photo of a person" },
+  { key: "dog", text: "a photo of a dog" },
+  { key: "cat", text: "a photo of a cat" },
   { key: "animal", text: "a photo of an animal" },
   { key: "scenery", text: "a photo of a landscape" },
   { key: "object", text: "a photo of an object" },
 ];
+
+// 강아지 털색 제로샷 분류용 문장 5개
+// 사람 사진은 가운데 픽셀 색을 세지만, 강아지 사진은 베이지·황금색 털이 "회색"으로 잘못 잡히는
+// 경우가 많았다. 그래서 강아지는 CLIP에게 털색을 직접 물어본다.
+// 초록·파랑처럼 실제 강아지 털에 없는 색은 배경(잔디 등) 때문에 잘못 뽑히므로 후보에서 뺐다
+const DOG_COLOR_LABELS = ["black", "brown", "gray", "white", "yellow"].map((color) => ({
+  key: color,
+  text: `a photo of a ${color} dog`,
+}));
 
 // 분위기 제로샷 분류용 문장 6개
 const VIBE_LABELS = [
@@ -131,14 +144,16 @@ function isFullyDone(entry) {
   return hasVectors(entry) && entry.generation != null && Boolean(entry.flavorText);
 }
 
-// labels(사람 확인 문장 + 분위기 문장)의 벡터까지 이미 계산되어 있는지 확인하는 함수
+// labels(사진 대상 확인 문장 + 분위기 문장)의 벡터까지 이미 계산되어 있는지 확인하는 함수
 function labelsDone(labels) {
   return (
     labels &&
     labels.subject?.length === SUBJECT_LABELS.length &&
     labels.subject.every((l) => l.vector?.length > 0) &&
     labels.vibe?.length === VIBE_LABELS.length &&
-    labels.vibe.every((l) => l.vector?.length > 0)
+    labels.vibe.every((l) => l.vector?.length > 0) &&
+    labels.dogColor?.length === DOG_COLOR_LABELS.length &&
+    labels.dogColor.every((l) => l.vector?.length > 0)
   );
 }
 
@@ -167,12 +182,12 @@ async function main() {
 
   console.log("모델 준비 완료.");
 
-  // labels(사람 확인 문장 4개, 분위기 문장 6개) 벡터 계산
+  // labels(사진 대상 확인 문장, 분위기 문장) 벡터 계산
   let labels = existingData?.labels;
   if (labelsDone(labels)) {
     console.log("labels는 이미 계산되어 있어 건너뜁니다.");
   } else {
-    console.log("labels(사람 확인/분위기 문장) 벡터 계산 중...");
+    console.log("labels(사진 대상 확인/분위기 문장) 벡터 계산 중...");
     const subject = [];
     for (const item of SUBJECT_LABELS) {
       const vector = await embedText(tokenizer, textModel, item.text);
@@ -183,7 +198,12 @@ async function main() {
       const vector = await embedText(tokenizer, textModel, item.text);
       vibe.push({ ...item, vector: round4(vector) });
     }
-    labels = { subject, vibe };
+    const dogColor = [];
+    for (const item of DOG_COLOR_LABELS) {
+      const vector = await embedText(tokenizer, textModel, item.text);
+      dogColor.push({ ...item, vector: round4(vector) });
+    }
+    labels = { subject, vibe, dogColor };
   }
 
   // 분위기를 정할 때 쓰는, 반올림 전의 vibe 문장 벡터 (정확도를 위해 매번 새로 계산)
