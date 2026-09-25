@@ -196,6 +196,20 @@ function toPercent(score) {
   return Math.max(0, Math.min(100, Math.round(ratio * 100)));
 }
 
+// 단어의 마지막 글자에 받침이 있으면 withBatchim, 없으면 withoutBatchim을 붙여 주는 함수
+// 예) addJosa("피카츄", "과", "와") → "피카츄와",
+//     addJosa("이상해꽃", "과", "와") → "이상해꽃과"
+// 한글 글자는 유니코드에서 "가"(0xAC00)부터 28개씩 받침 순서대로 늘어서 있어서,
+// (글자 코드 - 0xAC00)을 28로 나눈 나머지가 0이면 받침이 없는 글자다
+// ("니드런♀"처럼 끝에 성별 기호가 붙은 이름은 기호를 빼고 "런"을 기준으로 본다)
+function addJosa(word, withBatchim, withoutBatchim) {
+  const base = word.replace(/[♀♂]$/, "");
+  const code = base.charCodeAt(base.length - 1) - 0xac00;
+  const isHangul = code >= 0 && code <= 11171; // "가"~"힣" 범위
+  const hasBatchim = isHangul && code % 28 !== 0;
+  return word + (hasBatchim ? withBatchim : withoutBatchim);
+}
+
 // 색/분위기가 같은 이유를 문장 2개로 만드는 함수
 // textScore, imageScore: 이 포켓몬과 사진의 설명글 점수·그림 점수 (색·분위기로 다 못 채울 때 구체적인 이유로 사용)
 // subject: "person" 또는 "dog" (강아지면 "사진의 주된 색" 대신 "털색"이라고 말한다)
@@ -204,7 +218,7 @@ function buildReasons(photoColor, photoVibe, pokemon, textScore, imageScore, sub
   const colorWord = subject === "dog" ? "강아지의 털색" : "사진의 주된 색";
 
   if (photoColor.key === pokemon.color) {
-    reasons.push(`${colorWord}(${photoColor.nameKo})이 ${pokemon.nameKo}와 같아요`);
+    reasons.push(`${colorWord}(${photoColor.nameKo})이 ${addJosa(pokemon.nameKo, "과", "와")} 같아요`);
   }
   if (photoVibe.item.key === pokemon.vibe) {
     reasons.push(`둘 다 ${photoVibe.item.nameKo} 분위기예요`);
